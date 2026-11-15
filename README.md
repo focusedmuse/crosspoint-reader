@@ -4,6 +4,16 @@
 
 CrossPoint is open-source e-reader firmware - community-built, fully hackable, free forever. It's maintained by a growing community of developers and readers who believe your device should do what you want - not what a manufacturer decided for you.
 
+## BOOX Picco privacy fork
+
+This branch is maintained downstream in the [`focusedmuse/crosspoint-reader`](https://github.com/focusedmuse/crosspoint-reader) and [`focusedmuse/freeink-sdk`](https://github.com/focusedmuse/freeink-sdk) forks. It is not an official CrossPoint release.
+
+On Picco, **External Services** defaults to **Off**. This blocks public HTTP(S), ordinary DNS hostnames, plugin egress, automatic NTP, OTA, font downloads, and Plugin Hub until explicitly enabled. USB, SD, hotspot, Calibre, numeric on-link LAN access, and on-link `.local` mDNS remain available. See [External Services](USER_GUIDE.md#364-system) for the complete behavior.
+
+The downstream release contains two explicitly labeled artifacts: the exact hardware-tested image and a source-equivalent image reproduced twice from clean tag checkouts. Checksums and rebuild instructions are attached to the [`privacy-picco-2026.11.14` draft release](https://github.com/focusedmuse/crosspoint-reader/releases).
+
+**Picco installation safety:** use only the BOOX Tiles OTA/app-only web flasher with the device in Recovery. Never use PlatformIO upload, `esptool write_flash`, erase-flash, a full-chip image, or another device's backup; those paths can overwrite vendor recovery metadata.
+
 ### Now running on:
 
 - **ESP32C3-based** Xteink X4 and X3.
@@ -84,6 +94,8 @@ USB port or browser before assuming the device is locked. Only reach for the unl
 > the firmware you flashed doesn't support OTA, **there is no way out**.
 
 ## Install firmware
+
+> **BOOX Picco:** Do not use the generic CrossPoint web-installer or command-line instructions below. Install Picco builds only through the BOOX Tiles OTA/app-only web flasher while the device is in Recovery.
 
 ### Web installer (recommended)
 
