@@ -10,9 +10,9 @@ This branch is maintained downstream in the [`focusedmuse/crosspoint-reader`](ht
 
 On Picco, **External Services** defaults to **Off**. This blocks public HTTP(S), ordinary DNS hostnames, plugin egress, automatic NTP, OTA, font downloads, and Plugin Hub until explicitly enabled. USB, SD, hotspot, Calibre, numeric on-link LAN access, and on-link `.local` mDNS remain available. See [External Services](USER_GUIDE.md#364-system) for the complete behavior.
 
-The downstream release contains two explicitly labeled artifacts: the exact hardware-tested image and a source-equivalent image reproduced twice from clean tag checkouts. Checksums and rebuild instructions are attached to the [`privacy-picco-2026.11.14` draft release](https://github.com/focusedmuse/crosspoint-reader/releases).
+The downstream release contains two explicitly labeled artifacts: the exact hardware-tested image and a source-equivalent image reproduced twice from clean tag checkouts. Checksums, rebuild instructions, and binaries remain in an unpublished draft release and are intentionally not linked from this public README.
 
-**Picco installation safety:** use only the BOOX Tiles OTA/app-only web flasher with the device in Recovery. Never use PlatformIO upload, `esptool write_flash`, erase-flash, a full-chip image, or another device's backup; those paths can overwrite vendor recovery metadata.
+**Picco installation safety:** with the device in Recovery, use only the BOOX Tiles OTA/app-only web flasher, select the custom `.bin`, verify the intended local firmware is selected, and choose **Connect and update app**. This path preserves the bootloader, partition table, and otadata. Never use the generic CrossPoint installer, PlatformIO upload, `esptool write_flash`, offset `0x10000`, erase-flash, a full-chip image, or another device's backup.
 
 ### Now running on:
 
@@ -95,7 +95,7 @@ USB port or browser before assuming the device is locked. Only reach for the unl
 
 ## Install firmware
 
-> **BOOX Picco:** Do not use the generic CrossPoint web-installer or command-line instructions below. Install Picco builds only through the BOOX Tiles OTA/app-only web flasher while the device is in Recovery.
+> **BOOX Picco:** Do not use the generic CrossPoint installer or any command-line, `esptool`, PlatformIO, or `0x10000` instructions below. In BOOX Tiles, put the Picco in Recovery, select the custom `.bin`, verify OTA/app-only mode, and choose **Connect and update app**.
 
 ### Web installer (recommended)
 
