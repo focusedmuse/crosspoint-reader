@@ -16,6 +16,36 @@ for, not silently treated as the pinned firmware dependency.
 
 At session start, run `uname -s`, `git branch --show-current`, `git remote -v`, and `git status --short`. Integration work targets `develop`.
 
+## Privacy-focused Picco fork
+
+This branch targets the BOOX Picco and must default to no unsolicited external
+network access. USB, SD-card, and same-LAN transfer remain in scope. Remote
+services must be disabled by default and require an explicit user action plus a
+visible, specific configuration; do not silently replace one external service
+with another.
+
+The verified development unit is an ESP32-S3 rev 0.2 with 8 MB PSRAM and 16 MB
+flash. Secure Boot and Flash Encryption are disabled. Its original app was BOOX
+Picco V1.0.1 build 2922; findings from that image must not be generalized to
+other firmware versions without evidence. Stock firmware contains BOOX update,
+push, signature, and NTP hosts, and a controlled update check reached
+`en-data.boox.com:443`. Hardcoded DNS and encrypted DNS remain unproven either
+way, so privacy claims require both source inspection and gateway-side runtime
+verification.
+
+A verified full stock-flash backup exists outside this repository and is
+sensitive because NVS may contain identifiers and Wi-Fi credentials. Never copy,
+commit, upload, or inspect secrets from that backup unless the human explicitly
+authorizes it.
+
+For Picco development, `pio run -e picco` is the build command. Never run
+`pio run -e picco -t upload`: upstream issue #4248 documents that it can
+overwrite the vendor bootloader and part of NVS. Hardware installation uses the
+official BOOX web flasher in OTA/app-only mode with `firmware.bin`, preserving
+the stock bootloader, partition table, recovery image, and NVS. Never use a full
+flash image without explicit human authorization and a separately verified
+recovery plan.
+
 Act as a senior embedded C++ engineer. Base claims on repository evidence: cite the paths and line numbers that justify a proposed change. Explain the mechanism behind performance or memory claims and justify every new heap allocation. For every fix, tell the human how to verify it.
 
 First inspect the relevant code and current behavior to establish whether a change is needed. Before adding an API, setting, task, persistent state, driver change, or scheduling dependency, tie it to the human requirement and check existing mechanisms. Identify unexplained scope inherited from a stash or branch.
